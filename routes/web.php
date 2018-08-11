@@ -12,3 +12,5 @@
 */
 // 首页
 Route::get('/', 'PagesController@root')->name('root');
+// 用户认证功能 | 用户认证路由
+Auth::routes();
