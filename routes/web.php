@@ -14,3 +14,5 @@
 Route::get('/', 'PagesController@root')->name('root');
 // 用户认证功能 | 用户认证路由
 Auth::routes();
+//用户资源
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
