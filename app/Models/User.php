@@ -33,4 +33,10 @@ class User extends Authenticatable
          // 用户与话题中间的关系是 一对多 的关系
         return $this->hasMany(Topic::class);
     }
+
+    // 优化
+    public function isAuthorOf($model)
+    {
+        return $this->id == $model->user_id;
+    }
 }
