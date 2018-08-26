@@ -23,4 +23,7 @@
 @endif
 
 {{-- 分页 --}}
-{!! $replies->appends(Request::except('page'))->render() !!}
+{{-- !! $replies->appends(Request::except('page'))->render() !! --}}
+
+{{-- 分页 --}}
+{{ $replies->appends(['tab' => 'replies'])->links() }}
