@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use App\Models\Reply;
 
 // 通知类
-class TopicReplied extends Notification
+class TopicReplied extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -21,11 +21,11 @@ class TopicReplied extends Notification
         // 注入回复实体，方便 toDatabase 方法中的使用
         $this->reply = $reply;
     }
-
+    // 添加邮件通知频道
     public function via($notifiable)
     {
         // 开启通知的频道
-        return ['database'];
+        return ['database', 'mail'];
     }
 
     public function toDatabase($notifiable)
@@ -57,5 +57,12 @@ class TopicReplied extends Notification
         return [
             //
         ];
+    }
+
+    // 因为开启了 mail 频道，我们还需要新增 toMail 方法
+    public function toMail($notifiable)
+    {
+        $url = $this->reply->topic->link(['#reply' . $this->reply->id]);
+        return (new MailMessage)->line('你的话题有新回复！')->action('查看回复', $url);
     }
 }
