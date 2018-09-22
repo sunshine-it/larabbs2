@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ReplyRequest;
 use Auth;
 
+// 回复控制器
 class RepliesController extends Controller
 {
     public function __construct()
@@ -30,6 +31,6 @@ class RepliesController extends Controller
 		$this->authorize('destroy', $reply);
 		$reply->delete();
 
-		return redirect()->route('replies.index')->with('message', '删除成功！');
+		return redirect()->to($reply->topic->link())->with('message', '成功删除回复！');
 	}
 }

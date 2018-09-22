@@ -29,4 +29,10 @@ class TopicObserver
             dispatch(new TranslateSlug($topic));
         }
     }
+    // 监控话题成功删除的事件方法
+    public function deleted(Topic $topic)
+    {
+        // 话题连带删除 replies表
+        \DB::table('replies')->where('topic_id', $topic->id)->delete();
+    }
 }
