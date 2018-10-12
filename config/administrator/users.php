@@ -2,6 +2,7 @@
 
 use App\Models\User;
 
+// 用户配置信息
 return [
     // 页面标题
     'title' => '用户',
