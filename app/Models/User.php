@@ -10,6 +10,8 @@ use Spatie\Permission\Traits\HasRoles;
 // 用户模型
 class User extends Authenticatable
 {
+    use Traits\ActiveUserHelper;
+
     use HasRoles;
 
     use Notifiable {
