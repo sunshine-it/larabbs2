@@ -10,6 +10,9 @@ use Spatie\Permission\Traits\HasRoles;
 // 用户模型
 class User extends Authenticatable
 {
+    // 最近活跃时间
+    use Traits\LastActivedAtHelper;
+    // 活跃用户
     use Traits\ActiveUserHelper;
 
     use HasRoles;
