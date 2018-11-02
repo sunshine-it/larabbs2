@@ -41,8 +41,8 @@ return [
     ],
 
     'weixin' => [
-        'clinet_id' => env('WEIXIN_KEY'),
-        'clinet_secret' => env('WEIXIN_SECRET'),
+        'client_id' => env('WEIXIN_KEY'),
+        'client_secret' => env('WEIXIN_SECRET'),
         'redirect' => env('WEIXIN_REDIRECT_URI'),
     ],
 
