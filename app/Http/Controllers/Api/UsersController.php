@@ -6,10 +6,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\UserRequest;
 use App\Transformers\UserTransformer;
+use App\Models\Image;
 
 // 用户控制器类
 class UsersController extends Controller
 {
+    // 添加用户
     public function store(UserRequest $request)
     {
         $verifyData = \Cache::get($request->verification_key);
@@ -38,6 +40,20 @@ class UsersController extends Controller
                         'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
                     ])
                     ->setStatusCode(201);
+    }
+
+    // 编辑用户
+    public function update(UserRequest $request)
+    {
+        // 获取要编辑的用户
+        $user = $this->user();
+        $attributes = $request->only(['name', 'email', 'introduction']);
+        if ($request->avatar_image_id) {
+            $image = Image::find($request->avatar_image_id);
+            $attributes['avatar'] = $image->path;
+        }
+        $user->update($attributes);
+        return $this->response->item($user, new UserTransformer);
     }
 
     public function me()
