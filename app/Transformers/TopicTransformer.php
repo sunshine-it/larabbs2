@@ -8,6 +8,8 @@ use League\Fractal\TransformerAbstract;
 // 话题改变类
 class TopicTransformer extends TransformerAbstract
 {
+    // 嵌套的额外资源有 user 和 category
+    protected $availableIncludes = ['user', 'category'];
     public function transform(Topic $topic)
     {
         return [
@@ -24,5 +26,15 @@ class TopicTransformer extends TransformerAbstract
             'created_at' => $topic->created_at->toDateTimeString(),
             'updated_at' => $topic->updated_at->toDateTimeString(),
         ];
+    }
+
+    public function includeUser(Topic $topic)
+    {
+        return $this->item($topic->user, new UserTransformer());
+    }
+
+    public function includeCategory(Topic $topic)
+    {
+        return $this->item($topic->category, new CategoryTransformer());
     }
 }
