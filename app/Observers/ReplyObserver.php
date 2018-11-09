@@ -17,9 +17,13 @@ class ReplyObserver
         $topic = $reply->topic;
         // 当新增话题回复时,话题的 reply_count 做 +1 处理
         $topic->increment('reply_count', 1);
-
         // 通知作者话题被回复了
         $topic->user->notify(new TopicReplied($reply));
+
+        // 如果评论的作者不是话题的作者，才需要通知
+        // if ( ! $reply->user->isAuthorOf($topic)) {
+        //     $topic->user->notify(new TopicReplied($reply));
+        // }
     }
 
     public function creating(Reply $reply)
