@@ -7,7 +7,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => ['serializer:array', 'bindings'],
+    'middleware' => ['serializer:array', 'bindings', 'change-locale'],
 ], function($api) {
     // 增加调用频率限制 | 游客可以访问的接口
     $api->group([
