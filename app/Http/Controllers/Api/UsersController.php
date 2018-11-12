@@ -11,6 +11,10 @@ use App\Models\Image;
 // 用户控制器类
 class UsersController extends Controller
 {
+    public function activedIndex(User $user)
+    {
+        return $this->response->collection($user->getActiveUsers(), new UserTransformer());
+    }
     // 添加用户
     public function store(UserRequest $request)
     {
