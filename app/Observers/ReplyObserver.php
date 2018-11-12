@@ -11,7 +11,7 @@ use App\Notifications\TopicReplied;
 // 模型监控器类
 class ReplyObserver
 {
-    // 创建回复后事件
+    // 创建回复后事件（回复数加一）
     public function created(Reply $reply)
     {
         $topic = $reply->topic;
@@ -25,7 +25,7 @@ class ReplyObserver
         //     $topic->user->notify(new TopicReplied($reply));
         // }
     }
-
+    // 过滤xss攻击
     public function creating(Reply $reply)
     {
         $reply->content = clean($reply->content, 'user_topic_body');

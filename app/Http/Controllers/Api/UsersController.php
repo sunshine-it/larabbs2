@@ -51,7 +51,7 @@ class UsersController extends Controller
     {
         // 获取要编辑的用户
         $user = $this->user();
-        $attributes = $request->only(['name', 'email', 'introduction']);
+        $attributes = $request->only(['name', 'email', 'introduction', 'registration_id']);
         if ($request->avatar_image_id) {
             $image = Image::find($request->avatar_image_id);
             $attributes['avatar'] = $image->path;

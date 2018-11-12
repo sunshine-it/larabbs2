@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Overtrue\easysms
         App\Providers\EasySmsServiceProvider::class,
+        // jpush
+        App\Providers\JpushServiceProvider::class,
 
     ],
 
